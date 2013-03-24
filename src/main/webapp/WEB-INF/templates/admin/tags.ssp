@@ -1,0 +1,41 @@
+<%@ val tags: Seq[Tag] %>
+#{ attributes("layout") = "/WEB-INF/layouts/admin.ssp" }#
+#{ attributes("styles") = c.stylesheets("facebox") }#
+
+<h2><%= c.msg("admin.tags.manage") %></h2>
+
+<form method="post">
+	<%= c.csrf_token %>
+	<input type="text" name="tag"/>
+	<input type="submit" value="Create"/>
+</form>
+
+#if (!tags.isEmpty)	
+<table class="data">
+	<thead>
+	<tr>
+		<th><%= c.msg("admin.id") %></th>
+		<th><%= c.msg("admin.tag.name") %></th>
+		<th><%= c.msg("admin.actions") %></th>
+	</tr>
+	</thead>
+	<tbody>
+	#for (tag <- tags)
+	<tr>
+		<td>${tag.id}</td>
+		<td>${tag.name}</td>
+		<td><a href="/admin/tags/rename?id=${tag.id}" class="rename"><%= c.msg("admin.rename") %></a> |
+		<%= c.action_link("tags/delete?id="+tag.id, c.msg("admin.delete"), "method"->"delete", "remote"->true, "confirm"->"Are you sure?")%>
+		</td>
+	</tr>
+	#end
+	</tbody>
+</table>
+#end
+
+<%= c.script("facebox") %>
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+	$('a.rename').facebox()
+}) 
+</script>

@@ -1,0 +1,45 @@
+<section id="posts">
+<%@ val posts: Seq[Post] %>
+#{  val settings = SettingsHolder.get(application) }#
+
+#if (params.contains("tag"))
+<h3><%= c.msg("blog.posts.for.tag")%>: ${params("tag")}</h3>
+#end
+
+#for (post <- posts)
+<article class="post">
+	<header>
+	<time datetime="${post.timestamp}" pubdate="pubdate">${post.timestamp}</time>
+	<h1><a rel="bookmark" title="The permalink for ${post.title}" href="post?id=${post.id}">${post.title}</a></h1>
+	#if (! post.tags.isEmpty)
+		<span><%= c.msg("blog.tags") %>: #for (tag <- post.tags) <a href="?tag=${tag.name}" rel="category tag">${tag.name}</a> #end</span>
+	#end
+	</header>
+	<div class="entry">
+	<%= post.content %>
+	</div>
+	#if (settings.allowComments && post.allowComments)
+	<div class="add-comment">
+		<a href="post?id=${post.id}#comment-block">${post.comments.size} <%= if (post.comments.size == 1) c.msg("blog.comment") else c.msg("blog.comments") %></a>
+	</div>
+	#end
+</article>
+#end
+
+#if (! posts.isEmpty)
+<p><a href="?page=${params.parse[Int]("page").getOrElse(0)+1}">&#8594; <%= c.msg("blog.next") %></a></p>
+#else
+<h3><%= c.msg("blog.no.posts") %></h3>
+#end
+</section>
+
+<section id="sidebar">
+	<h2>Navigation</h2>
+	<nav>
+	#if (session.contains("user"))
+		<a href="admin/posts" title="Administration">Admin</a>
+	#else
+		<a href="/login" title="Login">Login</a>
+	#end
+	</nav>
+</section>

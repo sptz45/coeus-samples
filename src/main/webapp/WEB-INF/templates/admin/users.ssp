@@ -1,0 +1,25 @@
+<%@ val users: Seq[User] %>
+#{ attributes("layout") = "/WEB-INF/layouts/admin.ssp" }# 
+
+<h2><%= c.msg("admin.users.manage") %></h2>
+	
+<table class="data">
+	<thead>
+	<tr>
+		<th><%= c.msg("admin.id") %></th>
+		<th><%= c.msg("admin.user.username") %></th>
+		<th><%= c.msg("admin.user.email") %></th>
+		<th><%= c.msg("admin.actions") %></th>
+	</tr>
+	</thead>
+	<tbody>
+	#for (user <- users)
+	<tr>
+		<td>${user.id}</td>
+		<td>${user.username}</td>
+		<td>${user.email}</td>
+		<td><%= c.action_link("users/delete?id="+user.id, c.msg("admin.delete"), "method"->"delete", "remote"->true, "confirm"->"Are you sure?")%></td>
+	</tr>
+	#end
+	</tbody>
+</table>

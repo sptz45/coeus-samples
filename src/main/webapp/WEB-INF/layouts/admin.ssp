@@ -1,0 +1,46 @@
+<%@ var body: String %>
+<%@ var title: String = "Coeus Blog (sample application)" %>
+<%@ var styles: Seq[scala.xml.Elem] = Nil %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>${title}</title>
+<%= c.stylesheets("yui", "admin") %>
+<%= c.scripts("jquery", "coeus") %>
+<%= styles %> 
+<%= c.csrf_meta_tags %>
+</head>
+<body>
+
+<div id="hd">
+	<h1><%= c.msg("admin.administration") %></h1>
+	<div id="user-info"><p><%= c.msg("admin.welcome") %>, <strong>${session[User]("user").username}</strong>
+		[<a href="${c.url("/")}"><%= c.msg("admin.blog") %></a>,
+		<a href="/logout" title="Log out of from account"><%= c.msg("admin.sign.out") %></a>]</p>
+	</div>
+	<div id="navsite">
+		<h5>Site navigation:</h5>
+		<ul>
+    	<li><a href="/admin/posts" class="current">Posts</a></li>
+    	<li><a href="/admin/tags">Tags</a></li>
+    	<li><a href="/admin/comments">Comments</a></li>
+    	<li class="admin"><a href="/admin/users">Users</a></li>
+    	<li><a href="/admin/settings">Settings</a></li>
+		</ul>
+	</div>
+</div>
+
+<div id="bd">
+<%= unescape(body) %>
+</div>
+	
+<hr class="clear"/>
+	
+<div id="ft">
+<p>
+	<span class="low">[<%= c.msg("admin.powered.by") %>&nbsp;<a href="http://www.coeusweb.com/">Coeus Web Framework</a>]</span>
+</p>
+</div>
+
+</body>
+</html>

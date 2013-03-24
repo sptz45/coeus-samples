@@ -1,0 +1,44 @@
+<%@ var post: Post %>
+#{ attributes("layout") = "/WEB-INF/layouts/admin.ssp" }#
+#{ attributes("styles") = c.stylesheets("jwysiwyg/jquery.wysiwyg") }#
+
+#if (params.contains("id"))
+<p><a target="_blank" href="${c.url("/post?id="+params("id"))}"><%= c.msg("admin.preview") %></a></p>
+#end
+
+<form action="/admin/posts/save" method="post" class="top-align">
+<fieldset>
+	<ol>
+	#if (params.contains("id"))
+	<li><input type="hidden" name="id" value="${post.id}"/></li>
+	#end
+	<li><%= c.csrf_token %></li>
+	<li>
+		<%= c.label_and_error("title") %>
+		<input type="text" name="title" value="${post.title}"/>
+	</li>
+	<li>
+		<%= c.label_and_error("content") %>
+		<textarea name="content" id="content" rows="10" cols="70"><%= post.content %></textarea>
+	</li>
+	<li>
+		<%= c.label_and_error("allowComments") %>
+		<%= c.checkbox("allowComments", post.allowComments) %>
+	</li>
+	<li>
+		<%= c.label_and_error("tags") %>
+		<input type="text" name="tags" value="${post.tags.map(_.name).mkString(", ")}"/>
+	</li>
+	</ol>
+</fieldset>
+<fieldset class="submit">
+	<input type="submit" class="submit" name="" value="Save Post"/>
+</fieldset>
+</form>
+
+<%= c.scripts("jquery", "jwysiwyg/jquery.wysiwyg") %>
+<script type="text/javascript">
+$(function() {
+	$('#content').wysiwyg();
+}) 
+</script>

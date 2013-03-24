@@ -1,0 +1,47 @@
+<%@ val posts: Seq[Post] %>
+#{ attributes("layout") = "/WEB-INF/layouts/admin.ssp" }# 
+
+<h2><%= c.msg("admin.tags.manage") %></h2>
+
+<a href="/admin/posts/editor">Author new post</a>
+
+#if (!posts.isEmpty)	
+<table class="data">
+	<thead>
+	<tr>
+		<th><%= c.msg("admin.id") %></th>
+		<th><%= c.msg("admin.post.title") %></th>
+		<th><%= c.msg("admin.post.status") %></th>
+		<th><%= c.msg("admin.actions") %></th>
+	</tr>
+	</thead>
+	<tbody>
+	#for (post <- posts)
+	<tr>
+		<td>${post.id}</td>
+		<td>${post.title}</td>
+		<td><%= if (post.isPublished) c.msg("admin.post.published") else c.msg("admin.post.unpublished") %></td>
+		<td>
+			<% if(!post.isPublished) { %><a href="publish?id=${post.id}" id="${post.id}" class="publish"><%= c.msg("admin.post.publish") %></a> | <% } %>
+			<a href="posts/editor?id=${post.id}" ><%= c.msg("admin.edit") %></a> |
+			<%= c.action_link("posts/delete?id="+post.id, c.msg("admin.delete"), "method"->"delete", "remote"->"true", "confirm"->"Are you sure?")%>
+		</td>
+	</tr>
+	#end
+	</tbody>
+</table>
+#end
+
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+	$('td a.publish').click(function(e) {
+		$.ajax({
+			type: 'POST',
+			url: 'posts/publish',
+			data: 'id=' + e.target.id,
+			success: function(data) { $(e.target).parent().parent().children(':nth-child(3)').text(data); }
+		});
+		return false;
+	});
+}) 
+</script>

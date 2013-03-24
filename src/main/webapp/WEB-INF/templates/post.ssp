@@ -1,0 +1,81 @@
+<%@ val post: Post %>
+<%@ val comment: Comment %>
+#{  val settings = SettingsHolder.get(application) }#
+
+<section id="post">
+	<h1 class="invisible">${post.title}</h1>
+	
+	<article>
+		<header>
+			<time datetime="${post.timestamp}" pubdate="pubdate">${post.timestamp}</time>
+			<h1>${post.title}</h1>
+			#if (! post.tags.isEmpty)
+			<span><%= c.msg("blog.tags") %>: #for (tag <- post.tags) <a href="?tag=${tag.name}" rel="category tag">${tag.name}</a> #end</span>
+			#end
+		</header>
+	
+		<div class="entry">
+		<%= post.content %>
+		</div>
+	</article>
+	
+	#if (settings.allowComments && post.allowComments)
+	<aside>
+		<h3 id="comments" class="title">${post.comments.size} <%= if (post.comments.size == 1) c.msg("blog.comment") else c.msg("blog.comments") %></h1>
+	
+		#for (comm <- post.comments)
+		<article class="comment">
+			<h4>#if (comm.author.website ne null)
+			<a class="author" href="${comm.author.website}">${comm.author.name}</a>,
+			#else
+			<span class="author">${comm.author.name}</span>,
+			#end
+			<small><% c.msg("blog.at") %>&nbsp;${comm.created}</small></h4>
+			<p class="content">
+			${comm.content}
+			</p>
+		</article>
+		#end
+	</aside>
+	
+	<aside>
+		<h3 id="comment-form" class="title"><%=c.msg("blog.comment.leave")%></h3>
+	
+		<form action="comment" method="post" id="comment">
+			<input type="hidden" name="postId" value="${post.id}" />
+		
+			<label for="author.name">
+				<%= c.msg("comment.author.name") %>
+				<small>(<%= c.msg("blog.required") %>)</small>
+				<%= c.error("author.name") %>
+			</label>
+			<input type="text" name="author.name" value="${comment.author.name}"/>
+		
+			<label for="author.email">
+				<%= c.msg("comment.author.email") %>
+				<small>(<%= c.msg("blog.required") %>)</small>
+				<%= c.error("author.email") %>
+			</label>
+			<input type="text" name="author.email" value="${comment.author.email}"/>
+		
+			<label for="author.website">
+				<%= c.msg("comment.author.website") %>
+				<small>(<%= c.msg("blog.optional") %>)</small>
+				<%= c.error("author.website") %>
+			</label>
+			<input type="text" name="author.website" value="${comment.author.website}"/>
+		
+			<label for="content">
+				<%= c.msg("comment.content") %>
+				<small>(<%= c.msg("blog.required") %>)</small>
+				<%= c.error("content") %>
+			</label>
+			<textarea name="content" rows="10" style="width:100%;">${comment.content}</textarea>
+				
+			<input name="submit" type="submit" value="${c.msg("blog.comment.submit")}" />
+		</form>
+	</aside>
+	#end
+	
+</section>
+	

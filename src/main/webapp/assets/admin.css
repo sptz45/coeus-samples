@@ -1,0 +1,59 @@
+
+body { color: #333; background-color: #fff; font-family: 'Lucida Grande', Verdana, Arial, Sans-Serif; }
+
+h2 { font-size: 136%; font-weight: bold; margin: 10px 0 10px 0; }
+h3 { font-size: 123.1%; font-weight: bold; margin: 10px 0 20px 0; }
+
+a { text-decoration: none; }
+
+strong, .strong { font-weight: bold; }
+
+hr.clear { visibility: hidden; clear: both; }
+
+/* --- Forms --------------------------------------------------------- */
+
+/* Basic Form styling */
+fieldset        { margin: 1.5em 0 0 0; padding: 0; border: 1px solid gray;}
+legend          { margin-left: 1em; color: #000; font-weight: bold; }
+fieldset ol     { padding: 1em 1em 0 1em;  }
+fieldset li     { list-style: none; padding-bottom: 1em; }
+fieldset.submit { border-style: none; }
+
+form.top-align label { display: block; }
+
+form.hor-align.label { float: left; width: 10em; margin-right: 1em; }
+form.hor-align.fieldset li { float: left; clear: left; width: 100%; padding-bottom: 1em; }
+form.hor-align.fieldset { float: left; clear: left; width: 100%; margin: 0 0 1.5em 0; padding: 0; }
+form.hor-align.fieldset.submit { float: none; width: auto; border: 0 none #FFF; padding-left: 12em }
+
+form.right-align.label { text-align: right; }
+
+.error { color: red; }
+
+/* --- Tables --------------------------------------------------------- */
+table.data th,
+table.data td { text-align: center; padding: 5px 16px; }
+table.data th { font-weight: bold; }
+
+/* --- Main blocks --------------------------------------------------------- */
+
+#hd    { background-color: #4C94DD; padding-top: 3%; padding-left: 7%; }
+#hd a  { color: white; }
+#hd h1 { display: none; }
+#bd    { padding: 2% 7%; }
+#ft    { text-align: center; font-size: 75%; }
+
+
+/* --- Header --------------------------------------------------------- */
+
+#user-info   { position: absolute; right: 2%; top: 5px; color: white; font-size: 77%; }
+#user-info a { color: white; text-decoration: underline; border: none; }
+
+#navsite h5 { display: none; }
+#navsite ul { padding: 4px 0; text-align: left; }
+#navsite ul li { display: inline; }
+#navsite ul li.admin { margin-left: 15%; }
+#navsite ul li a { font-size: 122%; padding: 3px 0.5em; margin-left: 3px; font-weight: bold; }
+
+#navsite ul li a:hover { color: black; background-color: white; padding-bottom: 10px; }
+#navsite ul li a.current { color: #4C94DD; background-color: white; padding-bottom: 10px; }

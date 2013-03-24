@@ -1,0 +1,38 @@
+<% attributes("layout") = "" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<%= c.stylesheet("login") %>
+</head>
+<body>
+	<div id="doc">
+		<div id="hd">
+			<h2><%= c.msg("login.title") %></h2>
+		</div>
+		<div id="bd">
+			<form action="login" method="post" class="top-align" id="form">
+				<fieldset>
+					<legend>Login</legend>
+					#if (params.get("error") ne None)
+					<div class="error">Authentication Error</div>
+					#end
+					<ol>
+						<li>
+							<%= c.label("username") %>
+							<input type="text" name="username"/>
+						</li>
+						<li>
+							<%= c.label("password") %>
+							<input type="password" name="password"/>
+						</li>
+					</ol>
+				</fieldset>
+				<fieldset class="submit">
+					<input type="submit" class="submit" value="Login"/>
+				</fieldset>
+			</form>
+			<p><%= c.msg("login.to.registration") %>&nbsp;<a href="/register"><%= c.msg("login.register") %></a> <%= c.msg("login.first") %>.</p>
+		</div>
+	</div>
+</body>
+</html>

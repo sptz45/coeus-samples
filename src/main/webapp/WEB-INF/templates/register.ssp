@@ -1,0 +1,45 @@
+<%@ var user: User %>
+<% attributes("layout") = "" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<%= c.stylesheet("login") %>
+</head>
+<body>
+	<div id="doc">
+		<div id="hd">
+			<h2>${c.msg("registration.title")}</h2>
+		</div>
+		<div id="bd">
+			<form action="/register" method="post" class="top-align" id="form">
+				<fieldset>
+					<legend>User Information</legend>
+					<ol>
+						<li>
+							<%= c.label_and_error("username") %>
+							<input type="text" name="username" value="${user.username}"/>
+						</li>
+						<li>
+							<%= c.label_and_error("email") %>
+							<input type="text" name="email" value="${user.email}"/>
+						</li>
+						<li>
+							<%= c.label_and_error("password") %>
+							<input type="password" name="password" value="${user.password}"/>
+						</li> 
+						<li>
+							<%= c.label_and_error("password2") %>
+							<input type="password" name="password2" value="${params.getParameter("password2")}"/>
+						</li>
+					</ol>
+				</fieldset>
+				<fieldset class="submit">
+					<input type="submit" class="submit" name="" value="Create new account"/>
+				</fieldset>
+			</form>
+			<p><%= c.msg("registration.to.login") %>&nbsp;<a href="/login"><%= c.msg("registration.login") %></a> <%= c.msg("registration.page") %></p>
+		</div>
+	</div>
+ </body>
+</html>
+

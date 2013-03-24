@@ -1,0 +1,32 @@
+<%@ val settings: Settings %>
+#{ attributes("layout") = "/WEB-INF/layouts/admin.ssp" }#
+
+<h2><%= c.msg("admin.settings") %></h2>
+
+<form action="settings" method="post" class="top-align">
+<fieldset>
+	<ol>
+	<li><%= c.csrf_token %></li>
+	<li>
+		<%= c.label_and_error("title") %>
+		<input type="text" name="title" value="${settings.title}"/>
+	</li>
+	<li>
+		<%= c.label_and_error("description") %>
+		<input type="text" name="description" value="${settings.description}"/>
+	</li>
+	<li>
+		<%= c.label_and_error("postsPerPage") %>
+		<input type="text" name="postsPerPage" value="${settings.postsPerPage}"/>
+	</li>
+	<li>
+		<%= c.label_and_error("allowComments") %>
+		<%= c.checkbox("allowComments", settings.allowComments) %>
+	</li>
+	</ol>
+</fieldset>
+<fieldset class="submit">
+	<input type="submit" class="submit" name="submit" value="Save Settings"/>
+	<%= c.msg("admin.or") %>&nbsp;<a href="posts"><%= c.msg("admin.cancel") %></a>
+</fieldset>
+</form>

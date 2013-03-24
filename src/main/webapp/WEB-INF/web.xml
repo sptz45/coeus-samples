@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	metadata-complete="true" version="2.5">
+
+	<display-name>coeus-blog</display-name>
+
+	<context-param>
+		<param-name>org.eclipse.jetty.servlets.Default.gzip</param-name>
+		<param-value>true</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>org.eclipse.jetty.server.SessionURL</param-name>
+		<param-value>none</param-value>
+	</context-param>
+
+	<!-- Gzip all Servler (Controller) output.
+	<filter>
+		<filter-name>GzipFilter</filter-name>
+		<filter-class>org.eclipse.jetty.servlets.GzipFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>GzipFilter</filter-name>
+		<servlet-name>coeus-blog</servlet-name>
+	</filter-mapping>
+	-->
+
+	<servlet>
+		<servlet-name>coeus-blog</servlet-name>
+		<servlet-class>com.tzavellas.coeus.core.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>web-module</param-name>
+			<param-value>blog.BlogModule</param-value>
+		</init-param>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>coeus-blog</servlet-name>
+		<url-pattern>/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>/assets/*</url-pattern>
+	</servlet-mapping>
+
+	<session-config>
+		<session-timeout>10</session-timeout>
+	</session-config>
+</web-app>
