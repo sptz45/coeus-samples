@@ -1,0 +1,29 @@
+<%@ var vets: Vets %>
+<h2>Veterinarians:</h2>
+
+<table>
+  <thead>
+    <th>Name</th>
+    <th>Specialties</th>
+  </thead>
+  #for (vet <- vets)
+    <tr>
+      <td>${vet.firstName} ${vet.lastName}</td>
+      <td>
+	    #for (specialty <- vet.specialties)
+          ${specialty.name}
+        #end
+        #if (vet.hasNoSpecialties)
+          none
+        #end
+      </td>
+    </tr>
+  #end
+</table>
+<table class="table-buttons">
+  <tr>
+    <td>
+      <a href="${c.url("/vets.xml")}">View as XML</a>
+    </td>
+  </tr>
+</table>

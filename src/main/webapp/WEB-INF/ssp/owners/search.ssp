@@ -1,0 +1,20 @@
+<%@ var owner: Owner %>
+<h2>Find Owners:</h2>
+
+<form action="/owners" method="get">
+  <table>
+    <tr>
+      <th>
+        Last Name: <%= c.error("lastName") %>
+        <br/> 
+        <input name="lastName" value="${owner.lastName}" size="30" maxlength="80" />
+      </th>
+    </tr>
+    <tr>
+      <td><p class="submit"><input type="submit" value="Find Owners"/></p></td>
+    </tr>
+  </table>
+</form>
+
+<br/>
+<a href="${c.url("/owners/new")}">Add Owner</a>

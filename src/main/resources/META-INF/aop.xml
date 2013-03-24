@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+
+<!-- Custom aspects for the PetClinic sample application -->
+<aspectj>
+
+	<weaver>
+		<include within="petclinic..*"/>
+	</weaver>
+
+	<aspects>
+		<aspect name="petclinic.aspects.UsageLogAspect"/>
+		<concrete-aspect name="petclinic.aspects.ApplicationTraceAspect"
+				extends="petclinic.aspects.AbstractTraceAspect">
+			<pointcut name="traced" expression="execution(* com.tzavellas.coeus.sample..*.*(..))"/>
+		</concrete-aspect>
+	</aspects>
+
+</aspectj>

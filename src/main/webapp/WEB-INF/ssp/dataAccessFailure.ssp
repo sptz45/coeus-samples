@@ -1,0 +1,10 @@
+<% val ex = scopes.request("exception").asInstanceOf[Exception] %>
+
+<h2>Data access failure: <%= ex.getMessage %></h2>
+<p/>
+
+<%= ex.getStackTraceString %>
+
+<p/>
+<br/>
+<a href="${c.url("/")}">Home</a>

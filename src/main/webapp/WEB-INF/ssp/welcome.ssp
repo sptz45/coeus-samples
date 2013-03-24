@@ -1,0 +1,13 @@
+
+<%= c.image("pets.png") %> <!-- align="right" style="position:relative;right:30px; -->
+
+<h2><%= c.msg("welcome") %></h2>
+
+<ul>
+  <li><a href="${c.url("/owners/search")}">Find owner</a></li>
+  <li><a href="${c.url("/vets")}">Display all veterinarians</a></li>
+  <li><a href="${c.url("/static/html/tutorial.html")}">Tutorial</a></li>
+</ul>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>

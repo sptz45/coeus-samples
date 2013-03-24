@@ -1,0 +1,53 @@
+<%@ var owner: Owner %>
+
+<h2>${if (owner.isNew) "New" else ""} Owner:</h2>
+
+<form method="post">
+  <%= c.http_method(if (owner.isNew) "post" else "put") %>
+  <table>
+    <tr>
+      <th>
+        First Name: <%= c.error("firstName") %> 
+        <br/>
+        <input name="firstName" value="${owner.firstName}" size="30" maxlength="80"/>
+      </th>
+    </tr>
+    <tr>
+      <th>
+        Last Name: <%= c.error("lastName") %>
+        <br/>
+        <input name="lastName" value="${owner.lastName}" size="30" maxlength="80"/>
+      </th>
+    </tr>
+    <tr>
+      <th>
+        Address: <%= c.error("address") %>
+        <br/>
+        <input name="address" value="${owner.address}" size="30" maxlength="80"/>
+      </th>
+    </tr>
+    <tr>
+      <th>
+        City: <%= c.error("city") %>
+        <br/>
+        <input name="city" value="${owner.city}" size="30" maxlength="80"/>
+      </th>
+    </tr>
+    <tr>
+      <th>
+        Telephone: <%= c.error("telephone") %>
+        <br/>
+        <input name="telephone" value="${owner.telephone}" size="20" maxlength="20"/>
+      </th>
+    </tr>
+    <tr>
+      <td>
+      #if (owner.isNew)
+      	<p class="submit"><input type="submit" value="Add Owner"/></p>
+      #else
+      	<p class="submit"><input type="submit" value="Update Owner"/></p>
+      #end
+      </td>
+    </tr>
+  </table>
+</form>

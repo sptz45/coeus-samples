@@ -1,0 +1,51 @@
+<%@ var pet: Pet %>
+<%@ var types: Seq[PetType] %>
+
+#import (com.coeusweb.sample.petclinic.PetType)
+
+<h2>${if (pet.isNew) "New" else ""} Pet</h2>
+
+<b>Owner:</b> ${pet.owner.firstName} ${pet.owner.lastName}
+<br/>
+<form method="post">
+  <%= c.http_method(if (pet.isNew) "post" else "put") %>
+  <table>
+    <tr>
+      <th>
+        Name: <%= c.error("name") %>
+        <br/>
+        <input type="text" name="name" value="${pet.name}" size="30" maxlength="30"/>
+      </th>
+    </tr>
+    <tr>
+      <th> 
+        Birth Date: <%= c.error("birthDate") %>
+        <br/>
+        <input type="text" name="birthDate" value="${c.format_field(pet.birthDate)}" size="30" maxlength="30"/> (yyyy/mm/dd)
+      </th>
+    </tr>
+    <tr>
+      <th>
+        Type: <%= c.error("type") %>
+        <br/>
+        <%= c.select[PetType]("type", types, _.name) %>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        #if (pet.isNew)
+        <p class="submit"><input type="submit" value="Add Pet"/></p>
+        #else
+        <p class="submit"><input type="submit" value="Update Pet"/></p>
+        #end
+      </td>
+    </tr>
+  </table>
+</form>
+
+#if (!pet.isNew)
+<form method="post">
+  <%= c.http_method("delete") %>
+  <p class="submit"><input type="submit" value="Delete Pet"/></p>
+</form>
+#end

@@ -1,0 +1,88 @@
+<%@ var owner: Owner %>
+<h2>Owner Information</h2>
+
+  <table>
+    <tr>
+      <th>Name</th>
+      <td><b>${owner.firstName} ${owner.lastName}</b></td>
+    </tr>
+    <tr>
+      <th>Address</th>
+      <td>${owner.address}</td>
+    </tr>
+    <tr>
+      <th>City</th>
+      <td>${owner.city}</td>
+    </tr>
+    <tr>
+      <th>Telephone </th>
+      <td>${owner.telephone}</td>
+    </tr>
+  </table>
+  <table class="table-buttons">
+    <tr>
+      <td colspan="2" align="center">
+        <a href="${c.url("/owners/"+owner.id+"/edit")}">Edit Owner</a>
+      </td>
+      <td>
+        <a href="${c.url("/owners/"+owner.id+"/pets/new")}">Add New Pet</a>
+      </td>
+    </tr>
+  </table>
+
+  <h2>Pets and Visits</h2>
+
+  #for (pet <- owner.petList)
+    <table width="94%">
+      <tr>
+        <td valign="top">
+          <table>
+            <tr>
+              <th>Name</th>
+              <td><b>${pet.name}</b></td>
+            </tr>
+            <tr>
+              <th>Birth Date</th>
+              <td>${c.format_value(pet.birthDate)}</td>
+            </tr>
+            <tr>
+              <th>Type</th>
+              <td>${pet.`type`.name}</td>
+            </tr>
+          </table>
+        </td>
+        <td valign="top">
+          <table>
+            <thead>
+              <th>Visit Date</th>
+              <th>Description</th>
+            </thead>
+            #for(visit <- pet.visitsHistory)
+              <tr>
+                <td>${c.format_value(visit.date)}</td>
+                <td>${visit.description}</td>
+              </tr>
+            #end
+          </table>
+        </td>
+      </tr>
+    </table>
+    <table class="table-buttons">
+      <tr>
+        <td>
+          #{ val editUrl = c.url("/owners/{ownerId}/pets/{petId}/edit", owner.id, pet.id) }#
+          <a href="${editUrl}">Edit Pet</a>
+        </td>
+        <td></td>
+        <td>
+          #{ val addVisitUrl = c.url("/owners/{ownerId}/pets/{petId}/visits/new", owner.id, pet.id) }#
+          <a href="${addVisitUrl}">Add Visit</a>
+        </td>
+        <td></td>
+        <td>
+          #{ val visitsAtomUrl = c.url("/owners/{ownerId}/pets/{petId}/visits.atom", owner.id, pet.id) }#
+          <a href="${visitsAtomUrl}" rel="alternate" type="application/atom+xml">Atom Feed</a>
+        </td>
+      </tr>
+    </table>
+  #end

@@ -1,0 +1,28 @@
+<%@ var body: String %>
+<%@ var title: String = "PetClinic :: a Spring Framework demonstration" %>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <%= c.stylesheets("petclinic") %>
+  <title>${title}</title>	
+</head>
+
+<body>
+  <div id="main">
+  
+  <%= body %>
+  
+  <table class="footer">
+    <tr>
+      <td>
+      <a href="${c.url("/")}">Home</a>
+      </td>
+      <td align="right"><%= c.image("springsource-logo.png", alt="Sponsored by SpringSource") %></td>
+    </tr>
+  </table>
+
+  </div>
+</body>
+
+</html>
+  
