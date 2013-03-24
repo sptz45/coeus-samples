@@ -2,6 +2,7 @@ target
 .classpath
 .project
 .settings
+.cache
 lib_managed
 src_managed
 project/boot
