@@ -11,4 +11,4 @@ To get the code switch to the *blog* branch using `git checkout -b blog origin/b
 
 Port of Spring's petclinic sample application to Coeus.
 
-To get the code switch to the *petclinic* branch using `git checkout -b blog origin/blog`.
+To get the code switch to the *petclinic* branch using `git checkout -b petclinic origin/petclinic`.
